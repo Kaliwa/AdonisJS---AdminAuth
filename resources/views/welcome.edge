@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdonisJS - A fully featured web framework for Node.js</title>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main>
+    @if(!auth.user)
+    <form action="{{ route('auth.register')}}" method="POST">
+      <h2>Register form</h2>
+      <input type="email" name="email" placeholder="email">
+      <input type="password" name="password" placeholder="password">
+      <button type="submit">
+        Register
+      </button>
+    </form>
+    <form action="{{ route('auth.login')}}" method="POST">
+      <h2>Login form</h2>
+      <input type="email" name="email" placeholder="email">
+      <input type="password" name="password" placeholder="password">
+      <button type="submit">
+        Login
+      </button>
+    </form>
+    @else
+    @if(auth.user.isAdmin)
+    Admin User {{ auth.user.email }}
+    @else
+    Regular User {{ auth.user.email}}
+
+    @endif
+    <a href="{{ route('auth.logout') }}">Logout</a>
+    @endif
+  </main>
+</body>
+</html>
